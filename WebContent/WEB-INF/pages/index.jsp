@@ -101,9 +101,9 @@
 					</tr>
 				</table>
 			</div>
-			<div id="sckf" />
+			<div id="sckf" ></div><!-- <div id="sckf" />注意这种写法页面显示格式错误！ -->
 		</div>
-		<div id="foot"></div>
+		<div id="foot"/>
 	</div>
 </body>
 </html>
