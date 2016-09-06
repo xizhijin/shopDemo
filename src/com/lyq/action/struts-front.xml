@@ -20,7 +20,7 @@
 	</package>
 	<!-- 消费者Action -->
 	<package name="shop.customer" extends="shop-default" namespace="/customer">
-		<action name="customer_*" method="{1}" class="customerAction">
+		<action name="customer_*" class="customerAction" method="{1}">
 			<result name="input">/WEB-INF/pages/user/customer_reg.jsp</result>
 		</action>
 	</package>
