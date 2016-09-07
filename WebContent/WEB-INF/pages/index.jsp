@@ -40,10 +40,8 @@
 													<!-- 三级 -->
 													<s:if test="!children.isEmpty">
 														<span> 
-															<s:iterator value="children"><s:a action="product_getByCategoryId" namespace="/product">
-																	<s:param name="category.id" value="id" />
-																	<s:property value="name" escape="false" />
-																</s:a>
+															<s:iterator value="children">
+																<s:a action="product_getByCategoryId" namespace="/product"><s:param name="category.id" value="id" /><s:property value="name" escape="false" /></s:a>
 															</s:iterator>
 														</span>
 													</s:if>
@@ -62,15 +60,9 @@
 			<!-- 商品排行 -->
 			<div id="rqpgb">
 				<table width="195" border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td width="195" height="31"><img src="${context_path}/css/images/index_28.gif" width="195" height="29" /></td>
-					</tr>
-					<tr>
-						<td height="5" />
-					</tr>
-					<tr>
-						<td valign="top"><s:action name="product_findByClick" namespace="/product" executeResult="true" /></td>
-					</tr>
+					<tr><td width="195" height="31"><img src="${context_path}/css/images/index_28.gif" width="195" height="29" /></td></tr>
+					<tr><td height="5" /></tr>
+					<tr><td valign="top"><s:action name="product_findByClick" namespace="/product" executeResult="true" /></td></tr>
 				</table>
 			</div>
 			<!-- 推荐商品 -->
