@@ -48,7 +48,6 @@ public class CartAction extends BaseAction {
 	}
 	// 查看购物车
 	public String list() throws Exception {
-		System.out.println("my cart test...........................................");
 		return LIST;//返回购物车页面
 	}
 	// 从购物车中删除商品
