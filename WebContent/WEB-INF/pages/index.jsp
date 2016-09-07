@@ -57,7 +57,7 @@
 			</s:iterator>
 		</div>
 		<div id="right">
-			<!-- 商品排行 -->
+			<!-- 人气排行榜 -->
 			<div id="rqpgb">
 				<table width="195" border="0" cellpadding="0" cellspacing="0">
 					<tr><td width="195" height="31"><img src="${context_path}/css/images/index_28.gif" width="195" height="29" /></td></tr>

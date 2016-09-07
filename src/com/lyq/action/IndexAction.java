@@ -13,20 +13,6 @@ import com.lyq.model.product.ProductInfo;
 public class IndexAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	public String execute() throws Exception {
-		// 查询所有类别
-		String where = "where parent is null";
-		categories = categoryDao.find(-1, -1, where, null).getList();
-		// 查询推荐的商品
-		product_commend = productDao.findCommend();
-		// 查询销量最高的商品
-		product_sellCount = productDao.findSellCount();
-		// 查询人气高的商品
-		product_clickcount = productDao.findClickcount();
-		return SUCCESS;
-	}
-
 	// 所有类别
 	private List<ProductCategory> categories;
 	// 推荐商品
@@ -67,4 +53,19 @@ public class IndexAction extends BaseAction {
 	public void setProduct_clickcount(List<ProductInfo> productClickcount) {
 		product_clickcount = productClickcount;
 	}
+	
+	@Override
+	public String execute() throws Exception {
+		// 查询所有类别
+		String where = "where parent is null";
+		categories = categoryDao.find(-1, -1, where, null).getList();
+		// 查询推荐的商品
+		product_commend = productDao.findCommend();
+		// 查询销量最高的商品
+		product_sellCount = productDao.findSellCount();
+		// 查询人气高的商品
+		product_clickcount = productDao.findClickcount();
+		return SUCCESS;
+	}
+
 }
