@@ -126,7 +126,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	public String findNewProduct() throws Exception {
 		Map<String, String> orderby = new HashMap<String, String>();// 定义Map集合
 		orderby.put("createTime", "desc");// 为Map集合赋值
-		pageModel = productDao.find(1, 5, orderby);// 执行查找方法
+		pageModel = productDao.find(pageNo, pageSize, orderby);// 执行查找方法
 		image.put("url", "01.gif");// 设置副标题图片
 		return "list";// 返回商品列表页面
 	}
@@ -140,7 +140,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	public String findSellProduct() throws Exception {
 		Map<String, String> orderby = new HashMap<String, String>();// 定义Map集合
 		orderby.put("sellCount", "desc");// 为Map集合赋值
-		pageModel = productDao.find(1, 5, orderby);// 执行查找方法
+		pageModel = productDao.find(pageNo, pageSize, orderby);// 执行查找方法
 		image.put("url", "03.gif");
 		return "list";// 返回商品列表页面
 	}
@@ -156,7 +156,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 		orderby.put("createTime", "desc");// 为Map集合赋值
 		String where = "where commend = ?";// 设置条件语句
 		Object[] queryParams = { true };// 设置参数值
-		pageModel = productDao.find(where, queryParams, orderby, 1, 5);// 执行查询方法
+		pageModel = productDao.find(where, queryParams, orderby, pageNo, pageSize);// 执行查询方法
 		image.put("url", "06.gif");
 		return "list";// 返回商品列表页面
 	}
@@ -170,7 +170,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	public String findEnjoyProduct() throws Exception {
 		Map<String, String> orderby = new HashMap<String, String>();// 定义Map集合
 		orderby.put("clickcount", "desc");// 为Map集合赋值
-		pageModel = productDao.find(1, 2, orderby);// 执行查找方法
+		pageModel = productDao.find(pageNo, pageSize, orderby);// 执行查找方法
 		image.put("url", "07.gif");
 		return "list";// 返回商品列表页面
 	}
@@ -200,7 +200,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	public String findByClick() throws Exception {
 		Map<String, String> orderby = new HashMap<String, String>();// 定义Map集合
 		orderby.put("clickcount", "desc");// 为Map集合赋值
-		pageModel = productDao.find(1, 8, orderby);// 执行查找方法
+		pageModel = productDao.find(pageNo, pageSize, orderby);// 执行查找方法
 		return "clickList";// 返回product_click_list.jsp页面
 	}
 
@@ -215,8 +215,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 		orderby.put("sellCount", "desc");// 为Map集合赋值
 		String where = "where commend = ?";// 设置条件语句
 		Object[] queryParams = { true };// 设置参数值
-		pageModel = productDao.find(where, queryParams, orderby, pageNo,
-				pageSize);// 执行查询方法
+		pageModel = productDao.find(where, queryParams, orderby, pageNo, pageSize);// 执行查询方法
 		return "findList";// 返回product_find_list.jsp页面
 	}
 
@@ -229,7 +228,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	public String findBySellCount() throws Exception {
 		Map<String, String> orderby = new HashMap<String, String>();// 定义Map集合
 		orderby.put("sellCount", "desc");// 为Map集合赋值
-		pageModel = productDao.find(1, 6, orderby);// 执行查询方法
+		pageModel = productDao.find(pageNo, pageSize, orderby);// 执行查询方法
 		return "findList";// 返回热销商品列表
 	}
 
@@ -251,8 +250,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	public String save() throws Exception {
 		if (file != null) {// 如果文件路径不为空
 			// 获取服务器的绝对路径
-			String path = ServletActionContext.getServletContext().getRealPath(
-					"/upload");
+			String path = ServletActionContext.getServletContext().getRealPath("/upload");
 			File dir = new File(path);
 			if (!dir.exists()) {// 如果文件夹不存在
 				dir.mkdir();// 创建文件夹
@@ -280,15 +278,12 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 			}
 		}
 		// 如果商品类别和商品类别ID不为空，则保存商品类别信息
-		if (product.getCategory() != null
-				&& product.getCategory().getId() != null) {
+		if (product.getCategory() != null && product.getCategory().getId() != null) {
 			product.setCategory(categoryDao.load(product.getCategory().getId()));
 		}
 		// 如果上传文件和上传文件ID不为空，则保存文件的上传路径信息
-		if (product.getUploadFile() != null
-				&& product.getUploadFile().getId() != null) {
-			product.setUploadFile(uploadFileDao.load(product.getUploadFile()
-					.getId()));
+		if (product.getUploadFile() != null && product.getUploadFile().getId() != null) {
+			product.setUploadFile(uploadFileDao.load(product.getUploadFile().getId()));
 		}
 		productDao.saveOrUpdate(product);// 保存商品信息
 		return list();
@@ -333,8 +328,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	 */
 	private void createCategoryTree() {
 		String where = "where level=1";// 查询一级节点
-		PageModel<ProductCategory> pageModel = categoryDao.find(-1, -1, where,
-				null);// 执行查询方法
+		PageModel<ProductCategory> pageModel = categoryDao.find(-1, -1, where, null);// 执行查询方法
 		List<ProductCategory> allCategorys = pageModel.getList();
 		map = new LinkedHashMap<Integer, String>();// 创建新的集合
 		for (ProductCategory category : allCategorys) {// 遍历所有的一级节点
@@ -352,8 +346,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	 * @param flag
 	 *            是否为末节点
 	 */
-	private void setNodeMap(Map<Integer, String> map, ProductCategory node,
-			boolean flag) {
+	private void setNodeMap(Map<Integer, String> map, ProductCategory node, boolean flag) {
 		if (node == null) {// 如果节点为空
 			return;// 返回空，结束程序运行
 		}
