@@ -97,7 +97,7 @@
 	float: left;
 	height: 24px;
 	width: 692px;
-	border: 1px solid #c6e8ff;
+	/* border: 1px solid #c6e8ff; */
 	margin-top: 5px;
 }
 #tiao input {
@@ -118,7 +118,7 @@
 	float: left;
 }
 #right_foot01 {
-	float: left;
+	float: inherit;
 	height: 20px;
 	width: 688px;
 	border: 1px solid #5896dc;

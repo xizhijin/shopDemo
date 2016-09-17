@@ -9,17 +9,17 @@
 </head>
 <%@include file="/WEB-INF/pages/common/common_admin.jsp"%>
 <div id="box">
-<!-- top -->
-<s:action name="admin_top" namespace="/admin" executeResult="true"></s:action>
-<div id="mid">
-<!-- left -->
-<s:action name="admin_left" namespace="/admin" executeResult="true"></s:action>
-<!-- right -->
-<iframe name="abc" scrolling="auto" frameborder="0" width="690" height="500"></iframe>
-<%--
-<s:action name="admin_right" namespace="/admin" executeResult="true"></s:action>
- --%>
-</div>
-<div id="bottom"></div>
+	<!-- top -->
+	<s:action name="admin_top" namespace="/admin" executeResult="true" />
+	<div id="mid">
+		<!-- left -->
+		<s:action name="admin_left" namespace="/admin" executeResult="true" />
+		<!-- right -->
+		<iframe name="abc" scrolling="auto" frameborder="0" width="690" height="500" />
+		<%--
+		<s:action name="admin_right" namespace="/admin" executeResult="true" />
+ 		 --%>
+	</div>
+	<div id="bottom"></div>
 </div>
 </html>
